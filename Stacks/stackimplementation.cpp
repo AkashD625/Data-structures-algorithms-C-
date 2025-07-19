@@ -1,14 +1,15 @@
-// Online C++ compiler to run C++ program online
-#include<stdio.h>
+#include <iostream>
 using namespace std;
-// stack implementation
-class stack
+
+class MyStack
 {
+private:
       int *arr;
       int top;
       int size;
 
-      stack(int size)
+public:
+      MyStack(int size)
       {
             this->size = size;
             arr = new int[size];
@@ -30,40 +31,43 @@ class stack
 
       int pop()
       {
-            int d;
             if (top == -1)
             {
                   cout << "Underflow" << endl;
+                  return -1;
             }
             else
             {
-
-                  d = top;
-                  top = top - 1;
+                  int val = arr[top];
+                  top--;
+                  return val;
             }
-
-            return d;
       }
 
       int peek()
       {
-            return top;
-      }
-
-      int isempty()
-      {
             if (top == -1)
             {
-                  return true;
+                  cout << "Stack is empty" << endl;
+                  return -1;
             }
-            else
-            {
-                  return false;
-            }
+            return arr[top];
       }
-} int main()
+
+      bool isempty()
+      {
+            return top == -1;
+      }
+
+      ~MyStack()
+      {
+            delete[] arr;
+      }
+};
+
+int main()
 {
-      stack s;
+      MyStack s(5);
       s.push(5);
       s.push(8);
       s.push(7);
@@ -71,12 +75,13 @@ class stack
       s.push(1);
 
       int val = s.pop();
-      cout << val << "poped" << endl;
+      cout << val << " popped" << endl;
 
       int pe = s.peek();
-      cout << pe << "peek" << endl;
+      cout << pe << " peek" << endl;
 
-      int em = s.isempty();
-      cout << em << "EMpty status" << endl;
+      bool em = s.isempty();
+      cout << em << " Empty status" << endl;
+
       return 0;
 }
